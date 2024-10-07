@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1a73e8;
+            padding: 20px;
+            color: white;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .header img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .btn {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-red {
+            background-color: #d93025;
+        }
+
+        .back-btn {
+            background-color: #999;
+        }
+
+        .login-form {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            margin: 40px auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #5f6368;
+        }
+
+        .card p {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0 0;
+        }
+
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .team-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-card h3 {
+            margin-top: 0;
+            color: #1a73e8;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar-fill {
+            height: 10px;
+            background-color: #1a73e8;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .team-member {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            cursor: pointer;
+            color: #1a73e8;
+        }
+
+        .team-member:hover {
+            text-decoration: underline;
+        }
+
+        .employee-details {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .back-btn {
+            display: block;
+            margin-top: 20px;
+        }
+
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .attendance-table th, .attendance-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .attendance-table th {
+            background-color: #1a73e8;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="app"></div>
+
+    <script>
+        const teams = [
+            {
+                name: 'Development Team',
+                members: [
+                    { name: 'Rahul', email: 'rahul@example.com', password: 'rahul123', task: 'Frontend Development', progress: 75, attendance: ['Present', 'Present', 'Absent', 'Present', 'Present'] },
+                    { name: 'Pankaj', email: 'pankaj@example.com', password: 'pankaj123', task: 'Backend Development', progress: 80, attendance: ['Present', 'Present', 'Present', 'Present', 'Absent'] },
+                    { name: 'Rohit', email: 'rohit@example.com', password: 'rohit123', task: 'DevOps', progress: 60, attendance: ['Absent', 'Present', 'Present', 'Present', 'Present'] },
+                    { name: 'Rohan', email: 'rohan@example.com', password: 'rohan123', task: 'QA Testing', progress: 70, attendance: ['Present', 'Present', 'Absent', 'Present', 'Present'] }
+                ]
+            },
+            {
+                name: 'Design Team',
+                members: [
+                    { name: 'Bhavya', email: 'bhavya@example.com', password: 'bhavya123', task: 'UI Design', progress: 85, attendance: ['Present', 'Absent', 'Present', 'Present', 'Present'] },
+                    { name: 'Bhumika', email: 'bhumika@example.com', password: 'bhumika123', task: 'UX Research', progress: 70, attendance: ['Present', 'Present', 'Absent', 'Present', 'Present'] },
+                    { name: 'Bhavna', email: 'bhavna@example.com', password: 'bhavna123', task: 'Graphic Design', progress: 90, attendance: ['Absent', 'Present', 'Present', 'Present', 'Absent'] },
+                    { name: 'Birju', email: 'birju@example.com', password: 'birju123', task: 'Motion Design', progress: 65, attendance: ['Present', 'Present', 'Present', 'Absent', 'Present'] }
+                ]
+            },
+            {
+                name: 'Marketing Team',
+                members: [
+                    { name: 'Gurjot', email: 'gurjot@example.com', password: 'gurjot123', task: 'Content Marketing', progress: 80, attendance: ['Present', 'Present', 'Present', 'Present', 'Present'] },
+                    { name: 'Gurshan', email: 'gurshan@example.com', password: 'gurshan123', task: 'Social Media', progress: 75, attendance: ['Present', 'Absent', 'Present', 'Present', 'Present'] },
+                    { name: 'Gurleen', email: 'gurleen@example.com', password: 'gurleen123', task: 'SEO', progress: 70, attendance: ['Present', 'Present', 'Absent', 'Present', 'Present'] },
+                    { name: 'Gurkirat', email: 'gurkirat@example.com', password: 'gurkirat123', task: 'Email Marketing', progress: 85, attendance: ['Present', 'Present', 'Present', 'Present', 'Absent'] }
+                ]
+            },
+            {
+                name: 'Sales Team',
+                members: [
+                    { name: 'Daman', email: 'daman@example.com', password: 'daman123', task: 'Lead Generation', progress: 90, attendance: ['Absent', 'Present', 'Present', 'Present', 'Present'] },
+                    { name: 'Dhruv', email: 'dhruv@example.com', password: 'dhruv123', task: 'Client Negotiations', progress: 85, attendance: ['Present', 'Present', 'Present', 'Absent', 'Present'] },
+                    { name: 'Dakash', email: 'dakash@example.com', password: 'dakash123', task: 'Account Management', progress: 80, attendance: ['Present', 'Absent', 'Present', 'Present', 'Present'] },
+                    { name: 'Deepanshu', email: 'deepanshu@example.com', password: 'deepanshu123', task: 'Sales Strategy', progress: 75, attendance: ['Present', 'Present', 'Present', 'Present', 'Absent'] }
+                ]
+            }
+        ];
+
+        let currentEmployee = null;
+        let lastView = null;
+
+        function renderHeader(title) {
+            return `
+                <div class="header">
+                    <div style="display: flex; align-items: center;">
+                        <img src="log.png" alt="Company Logo" style="margin-right: 10px;" />
+                        <h1>Choudhary Tech's - ${title}</h1>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderLoginForm() {
+            const app = document.getElementById('app');
+            app.innerHTML = `
+                <div class="login-form">
+                    <h2>Login</h2>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" placeholder="Enter your email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" placeholder="Enter your password" />
+                    </div>
+                    <button class="btn" onclick="handleLogin()">Login</button>
+                </div>
+            `;
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            if (email === 'admin@example.com' && password === 'admin123') {
+                renderAdminDashboard();
+            } else {
+                const employee = findEmployee(email, password);
+                if (employee) {
+                    renderEmployeeDashboard(employee);
+                } else {
+                    alert('Invalid email or password!');
+                }
+            }
+        }
+
+        function findEmployee(email, password) {
+            for (const team of teams) {
+                for (const member of team.members) {
+                    if (member.email === email && member.password === password) {
+                        return member;
+                    }
+                }
+            }
+            return null;
+        }
+
+        function renderAdminDashboard() {
+            const app = document.getElementById('app');
+            app.innerHTML = `
+                ${renderHeader('Admin Dashboard')}
+                <div class="summary-cards">
+                    <div class="card">
+                        <h2>Total Employees</h2>
+                        <p>${getTotalEmployees()}</p>
+                    </div>
+                    <div class="card">
+                        <h2>Total Teams</h2>
+                        <p>${teams.length}</p>
+                    </div>
+                    <div class="card">
+                        <h2>Overall Progress</h2>
+                        <p>${getOverallProgress()}%</p>
+                    </div>
+                </div>
+                <div class="teams-grid">
+                    ${teams.map(renderTeamCard).join('')}
+                </div>
+            `;
+        }
+
+        function getTotalEmployees() {
+            return teams.reduce((total, team) => total + team.members.length, 0);
+        }
+
+        function getOverallProgress() {
+            const totalProgress = teams.reduce((total, team) => {
+                return total + team.members.reduce((teamTotal, member) => teamTotal + member.progress, 0);
+            }, 0);
+            const totalEmployees = getTotalEmployees();
+            return (totalProgress / totalEmployees).toFixed(2);
+        }
+
+        function renderTeamCard(team) {
+            return `
+                <div class="team-card">
+                    <h3>${team.name}</h3>
+                    <p>Members: ${team.members.length}</p>
+                    <p>Average Progress: ${getTeamAverageProgress(team)}%</p>
+                    <button class="btn" onclick="renderTeamDetails('${team.name}')">View Team</button>
+                </div>
+            `;
+        }
+
+        function getTeamAverageProgress(team) {
+            const totalProgress = team.members.reduce((total, member) => total + member.progress, 0);
+            return (totalProgress / team.members.length).toFixed(2);
+        }
+
+        function renderTeamDetails(teamName) {
+            lastView = renderAdminDashboard;
+            const team = teams.find(t => t.name === teamName);
+            const app = document.getElementById('app');
+            app.innerHTML = `
+                ${renderHeader(team.name)}
+                <div class="team-members">
+                    ${team.members.map(renderTeamMember).join('')}
+                </div>
+                <button class="btn back-btn" onclick="goBack()">Back</button>
+            `;
+        }
+
+        function renderTeamMember(member) {
+            return `
+                <div class="team-member" onclick="renderEmployeeDetails('${member.name}')">
+                    <span>${member.name}</span>
+                    <span>${member.task}</span>
+                </div>
+            `;
+        }
+
+        function renderEmployeeDetails(employeeName) {
+            lastView = () => renderTeamDetails(teams.find(team => team.members.some(member => member.name === employeeName)).name);
+            const employee = findEmployeeByName(employeeName);
+            const app = document.getElementById('app');
+            app.innerHTML = `
+                ${renderHeader(employee.name)}
+                <div class="employee-details">
+                    <h3>Task: ${employee.task}</h3>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: ${employee.progress}%"></div>
+                    </div>
+                    <h3>Attendance</h3>
+                    ${renderAttendanceTable(employee.attendance)}
+                </div>
+                <button class="btn back-btn" onclick="goBack()">Back</button>
+            `;
+        }
+
+        function renderAttendanceTable(attendance) {
+            return `
+                <table class="attendance-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${attendance.map((status, index) => `
+                            <tr>
+                                <td>Day ${index + 1}</td>
+                                <td>${status}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function renderEmployeeDashboard(employee) {
+            currentEmployee = employee;
+            const app = document.getElementById('app');
+            app.innerHTML = `
+                ${renderHeader('Employee Dashboard')}
+                <div class="employee-details">
+                    <h3>Task: ${employee.task}</h3>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: ${employee.progress}%"></div>
+                    </div>
+                    <h3>Attendance</h3>
+                    ${renderAttendanceTable(employee.attendance)}
+                </div>
+                <button class="btn btn-red" onclick="logout()">Logout</button>
+            `;
+        }
+
+        function logout() {
+            currentEmployee = null;
+            renderLoginForm();
+        }
+
+        function findEmployeeByName(name) {
+            for (const team of teams) {
+                for (const member of team.members) {
+                    if (member.name === name) {
+                        return member;
+                    }
+                }
+            }
+            return null;
+        }
+
+        function goBack() {
+            if (lastView) {
+                lastView();
+            }
+        }
+
+        renderLoginForm();
+    </script>
+</body>
+
+</html>
