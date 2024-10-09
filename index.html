@@ -1,499 +1,528 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHOUDHARY TECH'S</title>
-    <style>
-        :root {
-            --primary-color: #4a90e2;
-            --secondary-color: #50c878;
-            --accent-color: #ff6b6b;
-            --background-color: #f0f4f8;
-            --text-color: #333333;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--background-color);
-            color: var(--text-color);
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .logo-container {
-            text-align: center;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .logo {
-            width: 100px;
-            height: auto;
-            margin-right: 20px;
-        }
-        .company-name {
-            font-size: 36px;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-        .login-options {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .btn {
-            padding: 12px 24px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .btn:hover {
-            background-color: #3a7bc8;
-        }
-        .dashboard {
-            display: none;
-        }
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .team-block {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-        .team-block:hover {
-            transform: translateY(-5px);
-        }
-        .team-block h3 {
-            margin-top: 0;
-            color: var(--primary-color);
-        }
-        .team-members {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-        .team-member {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 14px;
-        }
-        .project-info {
-            margin-top: 10px;
-        }
-        .progress-bar {
-            width: 100%;
-            background-color: #e0e0e0;
-            height: 10px;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-        .progress {
-            height: 100%;
-            background-color: var(--secondary-color);
-            width: 0;
-        }
-        .employee-info {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .project-list {
-            margin-top: 20px;
-        }
-        .project-item {
-            background-color: #f7f9fa;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border-left: 4px solid var(--primary-color);
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .team-details {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-top: 20px;
-        }
-        .team-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        .stat-item {
-            text-align: center;
-        }
-        .stat-value {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-        .employee-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .employee-stat-item {
-            background-color: #f7f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-        }
-        .employee-stat-value {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-        .team-member-list {
-            margin-top: 20px;
-        }
-        .team-member-item {
-            background-color: #f0f4f8;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .team-member-item:hover {
-            background-color: #e0e6ed;
-        }
-        .member-details {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHOUDHARY TECH'S</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2c3e50;
+      --accent-color: #e74c3c;
+      --background-color: #ecf0f1;
+      --text-color: #34495e;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+   
+    }
+    .sidebar {
+      background-color: var(--secondary-color);
+      min-height: 100vh;
+      transition: all 0.3s;
+    }
+    .sidebar .nav-link {
+      color: #ecf0f1;
+      transition: all 0.3s;
+    }
+    .sidebar .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateX(5px);
+    }
+    .main-content {
+      transition: all 0.3s;
+    }
+    .card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    .login-bg {
+      background-image: url("hr2.png");
+      background-size: cover;
+      background-position: center;
+    }
+    .login-form {
+      background-color: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+    }
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    .btn-primary:hover {
+      background-color: #2980b9;
+      border-color: #2980b9;
+    }
+    .table {
+      background-color: white;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    .table thead {
+      background-color: var(--primary-color);
+      color: white;
+    }
+  </style>
 </head>
 <body>
+  
+  <div id="loginPage" class="min-vh-100 d-flex align-items-center justify-content-center login-bg py-5">
     <div class="container">
-        <div class="logo-container">
-            <img src="log.png" alt="MASTER TECH Logo" class="logo">
-            <div class="company-name">CHOUDHARY TECH'S</div>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="login-form p-5">
+            <h2 class="text-center mb-4">Sign in to CHOUDHARY TECH'S(username=admin,pass=password)</h2>
+            <form id="loginForm">
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Sign in</button>
+            </form>
+          </div>
         </div>
-        <div id="loginPage">
-            <div class="login-options">
-                <button class="btn" onclick="login('admin')">Login as Admin</button>
-                <button class="btn" onclick="login('employee')">Login as Employee</button>
-            </div>
-        </div>
-        <div id="adminDashboard" class="dashboard">
-            <div class="header">
-                <h2>Admin Dashboard</h2>
-                <div>
-                    <button class="btn" onclick="logout()">Logout</button>
-                </div>
-            </div>
-            <div class="team-grid">
-                <!-- Team blocks will be dynamically generated -->
-            </div>
-            <div id="teamDetails" class="team-details" style="display: none;">
-                <h3 id="teamName"></h3>
-                <p id="teamDescription"></p>
-                <div class="project-info">
-                    <p>Current Project: <span id="currentProject"></span></p>
-                    <p>Progress:</p>
-                    <div class="progress-bar">
-                        <div id="progressBar" class="progress"></div>
-                    </div>
-                    <p>Completed Projects: <span id="completedProjects"></span></p>
-                </div>
-                <div class="team-stats">
-                    <div class="stat-item">
-                        <div class="stat-value" id="teamEfficiency"></div>
-                        <div>Team Efficiency</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="projectsThisYear"></div>
-                        <div>Projects This Year</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="teamRating"></div>
-                        <div>Team Rating</div>
-                    </div>
-                </div>
-                <div class="team-member-list" id="teamMemberList"></div>
-                <button class="btn" onclick="hideTeamDetails()">Back to Teams</button>
-            </div>
-            <div id="memberDetails" class="member-details" style="display: none;">
-                <h3 id="memberName"></h3>
-                <p>Position: <span id="memberPosition"></span></p>
-                <p>Experience: <span id="memberExperience"></span></p>
-                <p>Skills: <span id="memberSkills"></span></p>
-                <p>Current Project: <span id="memberCurrentProject"></span></p>
-                <p>Tasks Completed: <span id="memberTasksCompleted"></span></p>
-                <button class="btn" onclick="hideMemberDetails()">Back to Team</button>
-            </div>
-        </div>
-        <div id="employeeDashboard" class="dashboard">
-            <div class="header">
-                <h2>Employee Dashboard</h2>
-                <div>
-                    <button class="btn" onclick="logout()">Logout</button>
-                </div>
-            </div>
-            <div class="employee-info">
-                <h3 id="employeeName"></h3>
-                <p>Team: <span id="employeeTeam"></span></p>
-                <p>Position: <span id="employeePosition"></span></p>
-                <div class="employee-stats">
-                    <div class="employee-stat-item">
-                        <div class="employee-stat-value" id="tasksCompleted"></div>
-                        <div>Tasks Completed</div>
-                    </div>
-                    <div class="employee-stat-item">
-                        <div class="employee-stat-value" id="projectsContributed"></div>
-                        <div>Projects Contributed</div>
-                    </div>
-                    <div class="employee-stat-item">
-                        <div class="employee-stat-value" id="efficiency"></div>
-                        <div>Efficiency</div>
-                    </div>
-                </div>
-                <div class="project-list">
-                    <h4>Projects</h4>
-                    <div id="employeeProjects"></div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-    <script>
-        let currentUser = null;
-        const users = {
-            admin: { username: 'admin', password: '1234' },
-            employee: { username: 'employee', password: '1234' }
-        };
+  </div>
 
-        const teamData = {
-            development: {
-                name: 'Development Team',
-                description: 'Our development team is responsible for building and maintaining our software products.',
-                currentProject: 'E-commerce Platform',
-                progress: 75,
-                completed: 12,
-                efficiency: '92%',
-                projectsThisYear: 15,
-                rating: '4.8/5',
-                members: [
-                    { name: 'Diksahnt Choudhary 👑', position: 'Team Leader', experience: '8 years', skills: 'JavaScript, React, Node.js', currentProject: 'E-commerce Platform', tasksCompleted: 45 },
-                    { name: 'Bhavya', position: 'Senior Developer', experience: '6 years', skills: 'Python, Django, AWS', currentProject: 'E-commerce Platform', tasksCompleted: 38 },
-                    { name: 'Mike Johnson', position: 'Full Stack Developer', experience: '4 years', skills: 'JavaScript, Vue.js, Express', currentProject: 'Mobile App Backend', tasksCompleted: 32 },
-                    { name: 'Emily Brown', position: 'Junior Developer', experience: '2 years', skills: 'HTML, CSS, JavaScript', currentProject: 'CRM System', tasksCompleted: 25 }
-                ]
+  <div id="dashboardPage" class="d-none">
+    <div class="container-fluid">
+      <div class="row">
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+          <div class="position-sticky pt-3">
+            <h1 class="text-center text-white mb-4">TechCorp Solutions</h1>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="navigateTo('dashboardSection')">
+                  <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="navigateTo('teamsSection')">
+                  <i class="fas fa-users me-2"></i>Teams
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="navigateTo('projectsSection')">
+                  <i class="fas fa-project-diagram me-2"></i>Projects
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="navigateTo('attendanceSection')">
+                  <i class="fas fa-calendar-check me-2"></i>Attendance
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="navigateTo('assignTasksSection')">
+                  <i class="fas fa-tasks me-2"></i>Assign Tasks
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h2 id="sectionTitle">Dashboard</h2>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <!-- <div class="btn-group me-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+              </div> -->
+              <button id="logoutBtn" class="btn btn-sm btn-outline-danger">
+                <i class="fas fa-sign-out-alt me-2"></i>Logout
+              </button>
+            </div>
+          </div>
+
+          <div id="dashboardSection">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-4">
+              <div class="col">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">Total Projects</h5>
+                    <p class="card-text display-4">15</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">Active Teams</h5>
+                    <p class="card-text display-4">6</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">Tasks Completed</h5>
+                    <p class="card-text display-4">120</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">Attendance Rate</h5>
+                    <p class="card-text display-4">95%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">Project Progress</h5>
+                    <canvas id="projectProgressChart"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">Team Performance</h5>
+                    <canvas id="teamPerformanceChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="teamsSection" class="d-none">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+              <div class="col">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">Team Alpha</h5>
+                    <p class="card-text">Members: 5</p>
+                    <p class="card-text">Active Projects: 2</p>
+                    <p class="card-text">Lead: Alice Johnson</p>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Alice Johnson - Project Manager</li>
+                      <li class="list-group-item">John Doe - Senior Developer</li>
+                      <li class="list-group-item">Jane Smith - UX Designer</li>
+                      <li class="list-group-item">Mike Brown - QA Engineer</li>
+                      <li class="list-group-item">Sarah Lee - Frontend Developer</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">Team Beta</h5>
+                    <p class="card-text">Members: 5</p>
+                    <p class="card-text">Active Projects: 1</p>
+                    <p class="card-text">Lead: Bob Smith</p>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Bob Smith - Technical Lead</li>
+                      <li class="list-group-item">Emma Watson - Backend Developer</li>
+                      <li class="list-group-item">Chris Evans - DevOps Engineer</li>
+                      <li class="list-group-item">Olivia Wilde - Data Scientist</li>
+                      <li class="list-group-item">Tom Hardy - Mobile Developer</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">Team Gamma</h5>
+                    <p class="card-text">Members: 5</p>
+                    <p class="card-text">Active Projects: 3</p>
+                    <p class="card-text">Lead: Charlie Brown</p>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Charlie Brown - Scrum Master</li>
+                      <li class="list-group-item">Lucy van Pelt - Business Analyst</li>
+                      <li class="list-group-item">Linus van Pelt - System Architect</li>
+                      <li class="list-group-item">Peppermint Patty - UI Designer</li>
+                      <li class="list-group-item">Schroeder - Database Administrator</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="projectsSection" class="d-none">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title mb-4">Projects Overview</h5>
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Project Name</th>
+                        <th>Deadline</th>
+                        <th>Status</th>
+                        <th>Progress</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Website Redesign</td>
+                        <td>Oct 15, 2024</td>
+                        <td><span class="badge bg-success">On Track</span></td>
+                        <td>
+                          <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Mobile App Development</td>
+                        <td>Nov 1, 2024</td>
+                        <td><span class="badge bg-danger">Delayed</span></td>
+                        <td>
+                          <div class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40%</div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Server Upgrade</td>
+                        <td>Dec 10, 2024</td>
+                        <td><span class="badge bg-success">On Track</span></td>
+                        <td>
+                          <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="attendanceSection" class="d-none">
+            <div class="card mb-4">
+              <div class="card-body">
+                <h5 class="card-title">Monthly Attendance Rate</h5>
+                <canvas id="attendanceChart"></canvas>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Attendance by Team Members</h5>
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Member Name</th>
+                        <th>Attendance (%)</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Alice Johnson</td>
+                        <td>95%</td>
+                        <td><span class="badge bg-success">Excellent</span></td>
+                      
+                      </tr>
+                      <tr>
+                        <td>Bob Smith</td>
+                        <td>92%</td>
+                        <td><span class="badge bg-success">Good</span></td>
+                      </tr>
+                      <tr>
+                        <td>Charlie Brown</td>
+                        <td>90%</td>
+                        <td><span class="badge bg-warning text-dark">Average</span></td>
+                      </tr>
+                      <tr>
+                        <td>Dana White</td>
+                        <td>88%</td>
+                        <td><span class="badge bg-warning text-dark">Average</span></td>
+                      </tr>
+                      <tr>
+                        <td>Eva Green</td>
+                        <td>94%</td>
+                        <td><span class="badge bg-success">Excellent</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="assignTasksSection" class="d-none">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Assign Tasks to Teams</h5>
+                <form id="assignTaskForm" class="mt-4">
+                  <div class="mb-3">
+                    <label for="teamSelect" class="form-label">Select Team</label>
+                    <select id="teamSelect" class="form-select">
+                      <option value="teamAlpha">Team Alpha</option>
+                      <option value="teamBeta">Team Beta</option>
+                      <option value="teamGamma">Team Gamma</option>
+                      <option value="teamDelta">Team Delta</option>
+                      <option value="teamEpsilon">Team Epsilon</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="taskDescription" class="form-label">Task Description</label>
+                    <textarea id="taskDescription" class="form-control" rows="3"></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="taskDeadline" class="form-label">Deadline</label>
+                    <input type="date" id="taskDeadline" class="form-control">
+                  </div>
+                  <div class="mb-3">
+                    <label for="taskPriority" class="form-label">Priority</label>
+                    <select id="taskPriority" class="form-select">
+                      <option value="low">Low</option>
+                      <option value="medium">Medium</option>
+                      <option value="high">High</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Assign Task</button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const loginPage = document.getElementById("loginPage");
+    const dashboardPage = document.getElementById("dashboardPage");
+    const loginForm = document.getElementById("loginForm");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const sectionTitle = document.getElementById("sectionTitle");
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      
+      if (username === "admin" && password === "password") {
+        loginPage.classList.add("d-none");
+        dashboardPage.classList.remove("d-none");
+      } else {
+        alert("Invalid username or password. Please try again.");
+      }
+    }
+
+    function handleLogout() {
+      dashboardPage.classList.add("d-none");
+      loginPage.classList.remove("d-none");
+      loginForm.reset();
+    }
+
+    function navigateTo(section) {
+      const sections = ['dashboardSection', 'teamsSection', 'projectsSection', 'attendanceSection', 'assignTasksSection'];
+      sections.forEach(sec => document.getElementById(sec).classList.add('d-none'));
+      document.getElementById(section).classList.remove('d-none');
+      sectionTitle.textContent = section.replace('Section', '');
+    }
+
+    loginForm.addEventListener("submit", handleLogin);
+    logoutBtn.addEventListener("click", handleLogout);
+
+    // Attendance Chart
+    const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
+    new Chart(attendanceCtx, {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        datasets: [{
+          label: 'Attendance (%)',
+          data: [90, 92, 94, 89, 96, 95],
+          borderColor: 'rgba(52, 152, 219, 1)',
+          backgroundColor: 'rgba(52, 152, 219, 0.2)',
+          tension: 0.1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100
+          }
+        }
+      }
+    });
+
+    // Project Progress Chart
+    const projectProgressCtx = document.getElementById('projectProgressChart').getContext('2d');
+    new Chart(projectProgressCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Completed', 'In Progress', 'Not Started'],
+        datasets: [{
+          data: [35, 50, 15],
+          backgroundColor: ['#2ecc71', '#f1c40f', '#e74c3c']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }
+    });
+
+    // Team Performance Chart
+    const teamPerformanceCtx = document.getElementById('teamPerformanceChart').getContext('2d');
+    new Chart(teamPerformanceCtx, {
+      type: 'radar',
+      data: {
+        labels: ['Productivity', 'Quality', 'Collaboration', 'Innovation', 'Timeliness'],
+        datasets: [{
+          label: 'Team Alpha',
+          data: [85, 90, 88, 78, 92],
+          backgroundColor: 'rgba(52, 152, 219, 0.2)',
+          borderColor: 'rgba(52, 152, 219, 1)',
+        }, {
+          label: 'Team Beta',
+          data: [88, 85, 92, 82, 89],
+          backgroundColor: 'rgba(46, 204, 113, 0.2)',
+          borderColor: 'rgba(46, 204, 113, 1)',
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          r: {
+            angleLines: {
+              display: false
             },
-            design: {
-                name: 'Design Team',
-                description: 'Our design team creates beautiful and intuitive user interfaces for our products.',
-                currentProject: 'Mobile App UI',
-                progress: 60,
-                completed: 8,
-                efficiency: '88%',
-                projectsThisYear: 10,
-                rating: '4.6/5',
-                members: [
-                    { name: 'Gurjot Singh 👑', position: 'Design Lead', experience: '7 years', skills: 'UI/UX Design, Sketch, Figma', currentProject: 'Mobile App UI', tasksCompleted: 40 },
-                    { name: 'Tom Wilson', position: 'Senior Designer', experience: '5 years', skills: 'Graphic Design, Adobe Creative Suite', currentProject: 'Mobile App UI', tasksCompleted: 35 },
-                    { name: 'Lucy Chen', position: 'UI Designer', experience: '3 years', skills: 'UI Design, Prototyping, Adobe XD', currentProject: 'Website Redesign', tasksCompleted: 28 },
-                    { name: 'David Kim', position: 'Junior Designer', experience: '1 year', skills: 'Illustration, Icon Design', currentProject: 'Branding Project', tasksCompleted: 20 }
-                ]
-            },
-            marketing: {
-                name: 'Marketing Team',
-                description: 'Our marketing team develops and implements strategies to promote our products and services.',
-                currentProject: 'Social Media Campaign',
-                progress: 40,
-                completed: 15,
-                efficiency: '90%',
-                projectsThisYear: 18,
-                rating: '4.7/5',
-                members: [
-                    { name: 'Gurshan Singh 👑', position: 'Marketing Manager', experience: '9 years', skills: 'Digital Marketing, SEO, Content Strategy', currentProject: 'Social Media Campaign', tasksCompleted: 50 },
-                    { name: 'Chris Taylor', position: 'Social Media Specialist', experience: '4 years', skills: 'Social Media Management, Analytics', currentProject: 'Social Media Campaign', tasksCompleted: 42 },
-                    { name: 'Olivia White', position: 'Content Creator', experience: '3 years', skills: 'Copywriting, Blog Management', currentProject: 'Content Calendar', tasksCompleted: 36 },
-                    { name: 'Ryan Garcia', position: 'Marketing Analyst', experience: '2 years', skills: 'Data Analysis, Google Analytics', currentProject: 'Performance Reporting', tasksCompleted: 30 }
-                ]
-            },
-            sales: {
-                name: 'Sales Team',
-                description: 'Our sales team is responsible for generating revenue and building client relationships.',
-                currentProject: 'Q3 Sales Strategy',
-                progress: 80,
-                completed: 20,
-                efficiency: '95%',
-                projectsThisYear: 22,
-                rating: '4.9/5',
-                members: [
-                    { name: 'Gurleen 👑', position: 'Sales Director', experience: '10 years', skills: 'B2B Sales, Account Management', currentProject: 'Q3 Sales Strategy', tasksCompleted: 55 },
-                    { name: 'Gurkirat', position: 'Senior Sales Representative', experience: '6 years', skills: 'Negotiation, CRM Management', currentProject: 'New Client Acquisition', tasksCompleted: 48 },
-                    { name: 'Daniel Lee', position: 'Sales Representative', experience: '3 years', skills: 'Cold Calling, Lead Generation', currentProject: 'Lead Nurturing', tasksCompleted: 40 },
-                    { name: 'Rachel Green', position: 'Junior Sales Representative', experience: '1 year', skills: 'Customer Service, Product Knowledge', currentProject: 'Client Support', tasksCompleted: 32 }
-                ]
-            }
-        };
-
-        function login(userType) {
-            const username = prompt(`Enter ${userType} username as admin/employee:`);
-            const password = prompt(`Enter ${userType} password (1234):`);
-
-            if (username === users[userType].username && password === users[userType].password) {
-                currentUser = userType;
-                document.getElementById('loginPage').style.display = 'none';
-                if (userType === 'admin') {
-                    document.getElementById('adminDashboard').style.display = 'block';
-                    initializeAdminDashboard();
-                } else {
-                    document.getElementById('employeeDashboard').style.display = 'block';
-                    loadEmployeeData();
-                }
-            } else {
-                alert('Invalid credentials. Please try again.');
-            }
+            suggestedMin: 50,
+            suggestedMax: 100
+          }
         }
-
-        function logout() {
-            currentUser = null;
-            document.getElementById('loginPage').style.display = 'block';
-            document.getElementById('adminDashboard').style.display = 'none';
-            document.getElementById('employeeDashboard').style.display = 'none';
-        }
-
-        function showTeamDetails(team) {
-            const data = teamData[team];
-            document.getElementById('teamName').textContent = data.name;
-            document.getElementById('teamDescription').textContent = data.description;
-            document.getElementById('currentProject').textContent = data.currentProject;
-            document.getElementById('progressBar').style.width = `${data.progress}%`;
-            document.getElementById('completedProjects').textContent = data.completed;
-            document.getElementById('teamEfficiency').textContent = data.efficiency;
-            document.getElementById('projectsThisYear').textContent = data.projectsThisYear;
-            document.getElementById('teamRating').textContent = data.rating;
-
-            const teamMemberList = document.getElementById('teamMemberList');
-            teamMemberList.innerHTML = '';
-            data.members.forEach(member => {
-                const memberElement = document.createElement('div');
-                memberElement.className = 'team-member-item';
-                memberElement.textContent = member.name;
-                memberElement.onclick = () => showMemberDetails(team, member.name);
-                teamMemberList.appendChild(memberElement);
-            });
-
-            document.getElementById('teamDetails').style.display = 'block';
-            document.querySelector('.team-grid').style.display = 'none';
-        }
-
-        function hideTeamDetails() {
-            document.getElementById('teamDetails').style.display = 'none';
-            document.querySelector('.team-grid').style.display = 'grid';
-        }
-
-        function showMemberDetails(team, memberName) {
-            const member = teamData[team].members.find(m => m.name === memberName);
-            document.getElementById('memberName').textContent = member.name;
-            document.getElementById('memberPosition').textContent = member.position;
-            document.getElementById('memberExperience').textContent = member.experience;
-            document.getElementById('memberSkills').textContent = member.skills;
-            document.getElementById('memberCurrentProject').textContent = member.currentProject;
-            document.getElementById('memberTasksCompleted').textContent = member.tasksCompleted;
-
-            document.getElementById('teamDetails').style.display = 'none';
-            document.getElementById('memberDetails').style.display = 'block';
-        }
-
-        function hideMemberDetails() {
-            document.getElementById('memberDetails').style.display = 'none';
-            document.getElementById('teamDetails').style.display = 'block';
-        }
-
-        function initializeAdminDashboard() {
-            const teamGrid = document.querySelector('.team-grid');
-            teamGrid.innerHTML = '';
-            for (const [teamKey, teamInfo] of Object.entries(teamData)) {
-                const teamBlock = document.createElement('div');
-                teamBlock.className = 'team-block';
-                teamBlock.onclick = () => showTeamDetails(teamKey);
-                teamBlock.innerHTML = `
-                    <h3>${teamInfo.name}</h3>
-                    <div class="team-members">
-                        ${teamInfo.members.map(member => `<span class="team-member">${member.name}</span>`).join('')}
-                    </div>
-                    <div class="project-info">
-                        <p>Current Project: ${teamInfo.currentProject}</p>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: ${teamInfo.progress}%;"></div>
-                        </div>
-                        <p>Completed Projects: ${teamInfo.completed}</p>
-                    </div>
-                `;
-                teamGrid.appendChild(teamBlock);
-            }
-        }
-
-        function loadEmployeeData() {
-            const employeeData = {
-                name: 'John Doe',
-                team: 'Development',
-                position: 'Senior Developer',
-                tasksCompleted: 45,
-                projectsContributed: 8,
-                efficiency: '94%',
-                projects: [
-                    { name: 'E-commerce Platform', progress: 75 },
-                    { name: 'Mobile App Backend', progress: 90 },
-                    { name: 'CRM System', progress: 60 }
-                ]
-            };
-
-            document.getElementById('employeeName').textContent = employeeData.name;
-            document.getElementById('employeeTeam').textContent = employeeData.team;
-            document.getElementById('employeePosition').textContent = employeeData.position;
-            document.getElementById('tasksCompleted').textContent = employeeData.tasksCompleted;
-            document.getElementById('projectsContributed').textContent = employeeData.projectsContributed;
-            document.getElementById('efficiency').textContent = employeeData.efficiency;
-
-            const projectsContainer = document.getElementById('employeeProjects');
-            projectsContainer.innerHTML = '';
-            employeeData.projects.forEach(project => {
-                const projectElement = document.createElement('div');
-                projectElement.className = 'project-item';
-                projectElement.innerHTML = `
-                    <h5>${project.name}</h5>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: ${project.progress}%;"></div>
-                    </div>
-                    <p>Progress: ${project.progress}%</p>
-                `;
-                projectsContainer.appendChild(projectElement);
-            });
-        }
-    </script>
+      }
+    });
+  </script>
 </body>
 </html>
