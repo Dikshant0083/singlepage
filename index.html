@@ -18,7 +18,6 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--background-color);
       color: var(--text-color);
-   
     }
     .sidebar {
       background-color: var(--secondary-color);
@@ -73,15 +72,111 @@
       background-color: var(--primary-color);
       color: white;
     }
+    .employee-table {
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .employee-table th, .employee-table td {
+      padding: 12px 15px;
+      text-align: left;
+    }
+    .employee-table th {
+      background-color: #f8f8f8;
+      font-weight: bold;
+      color: #333;
+      text-transform: uppercase;
+      font-size: 0.85em;
+    }
+    .employee-table tr:not(:last-child) {
+      border-bottom: 1px solid #eeeeee;
+    }
+    .employee-info {
+      display: flex;
+      align-items: center;
+    }
+    .employee-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+      object-fit: cover;
+    }
+    .status {
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.85em;
+      font-weight: bold;
+    }
+    .status-active {
+      background-color: #e6f7f2;
+      color: #00a86b;
+    }
+    .status-onleave {
+      background-color: #fff4e5;
+      color: #ffa500;
+    }
+    .status-terminated {
+      background-color: #ffe5e5;
+      color: #ff0000;
+    }
+    .progress-bar {
+      width: 100%;
+      background-color: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress {
+      height: 10px;
+      border-radius: 10px;
+    }
+    .progress-green { background-color: #00a86b; }
+    .progress-blue { background-color: #3498db; }
+    .progress-orange { background-color: #ffa500; }
+    .progress-red { background-color: #ff0000; }
+    .logo {
+      max-width: 150px;
+      height: auto;
+     
+    }
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        height: 100%;
+        z-index: 999;
+        width: 250px;
+      }
+      .sidebar.active {
+        left: 0;
+      }
+      .main-content {
+        width: 100%;
+      }
+      .employee-table {
+        font-size: 0.9em;
+      }
+      .employee-avatar {
+        width: 30px;
+        height: 30px;
+      }
+      .logo-mobile {
+        max-width: 100px;
+        height: auto;
+      }
+    }
   </style>
 </head>
 <body>
-  
   <div id="loginPage" class="min-vh-100 d-flex align-items-center justify-content-center login-bg py-5">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <div class="login-form p-5">
+          <div class="login-form p-4 p-md-5">
             <h2 class="text-center mb-4">Sign in to CHOUDHARY TECH'S</h2>
             <form id="loginForm">
               <div class="mb-3">
@@ -105,7 +200,15 @@
       <div class="row">
         <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
           <div class="position-sticky pt-3">
-            <h1 class="text-center text-white mb-4">CHOUDHARY TECH'S</h1>
+            <div class="text-center mb-4">
+              <svg class="logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" fill="#3498db"/>
+               
+                <text x="50" y="50" font-family="Arial" font-size="45" fill="white" text-anchor="middle" dominant-baseline="central">
+                C T
+                </text>
+              </svg>
+            </div>
             <ul class="nav flex-column">
               <li class="nav-item">
                 <a class="nav-link" href="#" onclick="navigateTo('dashboardSection')">
@@ -140,13 +243,18 @@
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h2 id="sectionTitle">Dashboard</h2>
             <div class="btn-toolbar mb-2 mb-md-0">
-              <!-- <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-              </div> -->
-              <button id="logoutBtn" class="btn btn-sm btn-outline-danger">
-                <i class="fas fa-sign-out-alt me-2"></i>Logout
-              </button>
+              <div class="d-flex align-items-center">
+                <svg class="logo-mobile d-md-none me-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" fill="#3498db"/>
+                  <text x="50" y="50" font-family="Arial" font-size="45" fill="white" text-anchor="middle" dominant-baseline="central">CT</text>
+                </svg>
+                <button id="sidebarToggle" class="btn btn-sm btn-outline-secondary d-md-none me-2">
+                  <i class="fas fa-bars"></i>
+                </button>
+                <button id="logoutBtn" class="btn btn-sm btn-outline-danger">
+                  <i class="fas fa-sign-out-alt me-2"></i>Logout
+                </button>
+              </div>
             </div>
           </div>
 
@@ -205,324 +313,417 @@
             </div>
           </div>
 
-          <div id="teamsSection" class="d-none">
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-              <div class="col">
-                <div class="card h-100">
-                  <div class="card-body">
-                    <h5 class="card-title">Team Alpha</h5>
-                    <p class="card-text">Members: 5</p>
-                    <p class="card-text">Active Projects: 2</p>
-                    <p class="card-text">Lead: Alice Johnson</p>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Alice Johnson - Project Manager</li>
-                      <li class="list-group-item">John Doe - Senior Developer</li>
-                      <li class="list-group-item">Jane Smith - UX Designer</li>
-                      <li class="list-group-item">Mike Brown - QA Engineer</li>
-                      <li class="list-group-item">Sarah Lee - Frontend Developer</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card h-100">
-                  <div class="card-body">
-                    <h5 class="card-title">Team Beta</h5>
-                    <p class="card-text">Members: 5</p>
-                    <p class="card-text">Active Projects: 1</p>
-                    <p class="card-text">Lead: Bob Smith</p>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Bob Smith - Technical Lead</li>
-                      <li class="list-group-item">Emma Watson - Backend Developer</li>
-                      <li class="list-group-item">Chris Evans - DevOps Engineer</li>
-                      <li class="list-group-item">Olivia Wilde - Data Scientist</li>
-                      <li class="list-group-item">Tom Hardy - Mobile Developer</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card h-100">
-                  <div class="card-body">
-                    <h5 class="card-title">Team Gamma</h5>
-                    <p class="card-text">Members: 5</p>
-                    <p class="card-text">Active Projects: 3</p>
-                    <p class="card-text">Lead: Charlie Brown</p>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Charlie Brown - Scrum Master</li>
-                      <li class="list-group-item">Lucy van Pelt - Business Analyst</li>
-                      <li class="list-group-item">Linus van Pelt - System Architect</li>
-                      <li class="list-group-item">Peppermint Patty - UI Designer</li>
-                      <li class="list-group-item">Schroeder - Database Administrator</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <div id="teamsSection" class="d-none">
+    <div class="row">
+      <div class="col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Employee Progress</h5>
+            <table class="employee-table">
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Position</th>
+                  <th>Status</th>
+                  <th>Progress</th>
+                </tr>
+              </thead>
+              <tbody id="employeeTableBody">
+                <!-- Employee rows will be inserted here by JavaScript -->
+              </tbody>
+            </table>
           </div>
-
-          <div id="projectsSection" class="d-none">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title mb-4">Projects Overview</h5>
-                <div class="table-responsive">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>Project Name</th>
-                        <th>Deadline</th>
-                        <th>Status</th>
-                        <th>Progress</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Website Redesign</td>
-                        <td>Oct 15, 2024</td>
-                        <td><span class="badge bg-success">On Track</span></td>
-                        <td>
-                          <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Mobile App Development</td>
-                        <td>Nov 1, 2024</td>
-                        <td><span class="badge bg-danger">Delayed</span></td>
-                        <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40%</div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Server Upgrade</td>
-                        <td>Dec 10, 2024</td>
-                        <td><span class="badge bg-success">On Track</span></td>
-                        <td>
-                          <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div id="attendanceSection" class="d-none">
-            <div class="card mb-4">
-              <div class="card-body">
-                <h5 class="card-title">Monthly Attendance Rate</h5>
-                <canvas id="attendanceChart"></canvas>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Attendance by Team Members</h5>
-                <div class="table-responsive">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>Member Name</th>
-                        <th>Attendance (%)</th>
-                        <th>Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Alice Johnson</td>
-                        <td>95%</td>
-                        <td><span class="badge bg-success">Excellent</span></td>
-                      
-                      </tr>
-                      <tr>
-                        <td>Bob Smith</td>
-                        <td>92%</td>
-                        <td><span class="badge bg-success">Good</span></td>
-                      </tr>
-                      <tr>
-                        <td>Charlie Brown</td>
-                        <td>90%</td>
-                        <td><span class="badge bg-warning text-dark">Average</span></td>
-                      </tr>
-                      <tr>
-                        <td>Dana White</td>
-                        <td>88%</td>
-                        <td><span class="badge bg-warning text-dark">Average</span></td>
-                      </tr>
-                      <tr>
-                        <td>Eva Green</td>
-                        <td>94%</td>
-                        <td><span class="badge bg-success">Excellent</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div id="assignTasksSection" class="d-none">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Assign Tasks to Teams</h5>
-                <form id="assignTaskForm" class="mt-4">
-                  <div class="mb-3">
-                    <label for="teamSelect" class="form-label">Select Team</label>
-                    <select id="teamSelect" class="form-select">
-                      <option value="teamAlpha">Team Alpha</option>
-                      <option value="teamBeta">Team Beta</option>
-                      <option value="teamGamma">Team Gamma</option>
-                      <option value="teamDelta">Team Delta</option>
-                      <option value="teamEpsilon">Team Epsilon</option>
-                    </select>
-                  </div>
-                  <div class="mb-3">
-                    <label for="taskDescription" class="form-label">Task Description</label>
-                    <textarea id="taskDescription" class="form-control" rows="3"></textarea>
-                  </div>
-                  <div class="mb-3">
-                    <label for="taskDeadline" class="form-label">Deadline</label>
-                    <input type="date" id="taskDeadline" class="form-control">
-                  </div>
-                  <div class="mb-3">
-                    <label for="taskPriority" class="form-label">Priority</label>
-                    <select id="taskPriority" class="form-select">
-                      <option value="low">Low</option>
-                      <option value="medium">Medium</option>
-                      <option value="high">High</option>
-                    </select>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Assign Task</button>
-                </form>
-              </div>
-            </div>
-          </div>
-
-        </main>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- ... (other sections remain the same) ... -->
+  <div id="projectsSection" class="d-none">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title mb-4">Projects Overview</h5>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Project Name</th>
+                <th>Deadline</th>
+                <th>Status</th>
+                <th>Progress</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Website Redesign</td>
+                <td>Oct 15, 2024</td>
+                <td><span class="badge bg-success">On Track</span></td>
+                <td>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Mobile App Development</td>
+                <td>Nov 1, 2024</td>
+                <td><span class="badge bg-danger">Delayed</span></td>
+                <td>
+                  <div class="progress">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40%</div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Server Upgrade</td>
+                <td>Dec 10, 2024</td>
+                <td><span class="badge bg-success">On Track</span></td>
+                <td>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="attendanceSection" class="d-none">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Monthly Attendance Rate</h5>
+        <canvas id="attendanceChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Attendance by Team Members</h5>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Member Name</th>
+                <th>Attendance (%)</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Alice Johnson</td>
+                <td>95%</td>
+                <td><span class="badge bg-success">Excellent</span></td>
+              
+              </tr>
+              <tr>
+                <td>Bob Smith</td>
+                <td>92%</td>
+                <td><span class="badge bg-success">Good</span></td>
+              </tr>
+              <tr>
+                <td>Charlie Brown</td>
+                <td>90%</td>
+                <td><span class="badge bg-warning text-dark">Average</span></td>
+              </tr>
+              <tr>
+                <td>Dana White</td>
+                <td>88%</td>
+                <td><span class="badge bg-warning text-dark">Average</span></td>
+              </tr>
+              <tr>
+                <td>Eva Green</td>
+                <td>94%</td>
+                <td><span class="badge bg-success">Excellent</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="assignTasksSection" class="d-none">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Assign Tasks to Teams</h5>
+        <form id="assignTaskForm" class="mt-4">
+          <div class="mb-3">
+            <label for="teamSelect" class="form-label">Select Team</label>
+            <select id="teamSelect" class="form-select">
+              <option value="teamAlpha">Team Alpha</option>
+              <option value="teamBeta">Team Beta</option>
+              <option value="teamGamma">Team Gamma</option>
+              <option value="teamDelta">Team Delta</option>
+              <option value="teamEpsilon">Team Epsilon</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="taskDescription" class="form-label">Task Description</label>
+            <textarea id="taskDescription" class="form-control" rows="3"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="taskDeadline" class="form-label">Deadline</label>
+            <input type="date" id="taskDeadline" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="taskPriority" class="form-label">Priority</label>
+            <select id="taskPriority" class="form-select">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Assign Task</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</main>
+</div>
+</div>
+</div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    const loginPage = document.getElementById("loginPage");
-    const dashboardPage = document.getElementById("dashboardPage");
-    const loginForm = document.getElementById("loginForm");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const sectionTitle = document.getElementById("sectionTitle");
+  
+const loginPage = document.getElementById("loginPage");
+const dashboardPage = document.getElementById("dashboardPage");
+const loginForm = document.getElementById("loginForm");
+const logoutBtn = document.getElementById("logoutBtn");
+const sectionTitle = document.getElementById("sectionTitle");
 
-    function handleLogin(event) {
-      event.preventDefault();
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      
-      if (username === "admin" && password === "password") {
-        loginPage.classList.add("d-none");
-        dashboardPage.classList.remove("d-none");
-      } else {
-        alert("Invalid username or password. Please try again.");
-      }
-    }
+function handleLogin(event) {
+  event.preventDefault();
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  
+  if (username === "admin" && password === "password") {
+    loginPage.classList.add("d-none");
+    dashboardPage.classList.remove("d-none");
+  } else {
+    alert("Invalid username or password. Please try again.");
+  }
+}
 
-    function handleLogout() {
-      dashboardPage.classList.add("d-none");
-      loginPage.classList.remove("d-none");
-      loginForm.reset();
-    }
+function handleLogout() {
+  dashboardPage.classList.add("d-none");
+  loginPage.classList.remove("d-none");
+  loginForm.reset();
+}
 
-    function navigateTo(section) {
-      const sections = ['dashboardSection', 'teamsSection', 'projectsSection', 'attendanceSection', 'assignTasksSection'];
-      sections.forEach(sec => document.getElementById(sec).classList.add('d-none'));
-      document.getElementById(section).classList.remove('d-none');
-      sectionTitle.textContent = section.replace('Section', '');
-    }
+function navigateTo(section) {
+  const sections = ['dashboardSection', 'teamsSection', 'projectsSection', 'attendanceSection', 'assignTasksSection'];
+  sections.forEach(sec => document.getElementById(sec).classList.add('d-none'));
+  document.getElementById(section).classList.remove('d-none');
+  sectionTitle.textContent = section.replace('Section', '');
 
-    loginForm.addEventListener("submit", handleLogin);
-    logoutBtn.addEventListener("click", handleLogout);
+  if (section === 'teamsSection') {
+    populateTeamsSection();
+  }
+}
 
-    // Attendance Chart
-    const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
-    new Chart(attendanceCtx, {
-      type: 'line',
-      data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-        datasets: [{
-          label: 'Attendance (%)',
-          data: [90, 92, 94, 89, 96, 95],
-          borderColor: 'rgba(52, 152, 219, 1)',
-          backgroundColor: 'rgba(52, 152, 219, 0.2)',
-          tension: 0.1
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 100
-          }
+loginForm.addEventListener("submit", handleLogin);
+logoutBtn.addEventListener("click", handleLogout);
+
+// Teams data and functionality
+const teams = [
+  {
+    name: "Team Alpha",
+    employees: [
+      { name: "John Smith", avatar: "https://randomuser.me/api/portraits/men/1.jpg", position: "Team Lead", status: "Active", progress: 85, progressColor: "green" },
+      { name: "Emily Johnson", avatar: "https://randomuser.me/api/portraits/women/1.jpg", position: "Developer", status: "Active", progress: 75, progressColor: "blue" },
+      { name: "Michael Brown", avatar: "https://randomuser.me/api/portraits/men/2.jpg", position: "Designer", status: "Active", progress: 80, progressColor: "green" },
+      { name: "Sarah Davis", avatar: "https://randomuser.me/api/portraits/women/2.jpg", position: "QA Tester", status: "Active", progress: 70, progressColor: "blue" }
+    ]
+  },
+  {
+    name: "Team Beta",
+    employees: [
+      { name: "David Wilson", avatar: "https://randomuser.me/api/portraits/men/3.jpg", position: "Team Lead", status: "Active", progress: 90, progressColor: "green" },
+      { name: "Jessica Taylor", avatar: "https://randomuser.me/api/portraits/women/3.jpg", position: "Website Redesign", status: "On Leave", progress: 60, progressColor: "orange" },
+      { name: "Robert Martinez", avatar: "https://randomuser.me/api/portraits/men/4.jpg", position: "Database Management", status: "Active", progress: 82, progressColor: "green" },
+      { name: "Lauren Anderson", avatar: "https://randomuser.me/api/portraits/women/4.jpg", position: "Data Analytics", status: "Active", progress: 78, progressColor: "blue" }
+    ]
+  },
+  {
+    name: "Team Gamma",
+    employees: [
+      { name: "Christopher Lee", avatar: "https://randomuser.me/api/portraits/men/5.jpg", position: "Team Lead", status: "Active", progress: 88, progressColor: "green" },
+      { name: "Amanda White", avatar: "https://randomuser.me/api/portraits/women/5.jpg", position: "Mobile App Development", status: "Active", progress: 79, progressColor: "blue" },
+      { name: "Daniel Harris", avatar: "https://randomuser.me/api/portraits/men/6.jpg", position: "API Integration", status: "On Leave", progress: 55, progressColor: "orange" },
+      { name: "Olivia Martin", avatar: "https://randomuser.me/api/portraits/women/6.jpg", position: "IT Security Audits", status: "Active", progress: 72, progressColor: "blue" }
+    ]
+  },
+  {
+    name: "Team Delta",
+    employees: [
+      { name: "William Thompson", avatar: "https://randomuser.me/api/portraits/men/7.jpg", position: "Team Lead", status: "Active", progress: 87, progressColor: "green" },
+      { name: "Sophia Garcia", avatar: "https://randomuser.me/api/portraits/women/7.jpg", position: "Server Upgrade", status: "Active", progress: 81, progressColor: "blue" },
+      { name: "James Rodriguez", avatar: "https://randomuser.me/api/portraits/men/8.jpg", position: "Software Developmen", status: "Active", progress: 76, progressColor: "blue" },
+      { name: "Emma Lopez", avatar: "https://randomuser.me/api/portraits/women/8.jpg", position: "Technical Support ", status: "Terminated", progress: 20, progressColor: "red" }
+    ]
+  },
+  {
+    name: "Team Epsilon",
+    employees: [
+      { name: "Alexander Clark", avatar: "https://randomuser.me/api/portraits/men/9.jpg", position: "Team Lead", status: "Active", progress: 89, progressColor: "green" },
+      { name: "Isabella Lewis", avatar: "https://randomuser.me/api/portraits/women/9.jpg", position: "Marketing", status: "Active", progress: 83, progressColor: "green" },
+      { name: "Benjamin Walker", avatar: "https://randomuser.me/api/portraits/men/10.jpg", position: "Cybersecurity", status: "Active", progress: 77, progressColor: "blue" },
+      { name: "Mia Hall", avatar: "https://randomuser.me/api/portraits/women/10.jpg", position: "Cloud Management ", status: "Active", progress: 74, progressColor: "blue" }
+    ]
+  }
+];
+
+function createEmployeeRow(employee) {
+  return `
+    <tr>
+      <td>
+        <div class="employee-info">
+          <img src="${employee.avatar}" alt="${employee.name}" class="employee-avatar">
+          ${employee.name}
+        </div>
+      </td>
+      <td>${employee.position}</td>
+      <td><span class="status status-${employee.status.toLowerCase().replace(' ', '')}">${employee.status}</span></td>
+      <td>
+        <div class="progress-bar">
+          <div class="progress progress-${employee.progressColor}" style="width: ${employee.progress}%"></div>
+        </div>
+      </td>
+    </tr>
+  `;
+}
+
+function createTeamSection(team) {
+  return `
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">${team.name}</h5>
+        <table class="employee-table">
+          <thead>
+            <tr>
+              <th>Employee</th>
+              <th>Position</th>
+              <th>Status</th>
+              <th>Progress</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${team.employees.map(createEmployeeRow).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+function populateTeamsSection() {
+  const teamsSection = document.getElementById('teamsSection');
+  teamsSection.innerHTML = teams.map(createTeamSection).join('');
+}
+
+// Chart initialization
+document.addEventListener('DOMContentLoaded', function() {
+  // Attendance Chart
+  const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
+  new Chart(attendanceCtx, {
+    type: 'line',
+    data: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+      datasets: [{
+        label: 'Attendance (%)',
+        data: [90, 92, 94, 89, 96, 95],
+        borderColor: 'rgba(52, 152, 219, 1)',
+        backgroundColor: 'rgba(52, 152, 219, 0.2)',
+        tension: 0.1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100
         }
       }
-    });
+    }
+  });
 
-    // Project Progress Chart
-    const projectProgressCtx = document.getElementById('projectProgressChart').getContext('2d');
-    new Chart(projectProgressCtx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Completed', 'In Progress', 'Not Started'],
-        datasets: [{
-          data: [35, 50, 15],
-          backgroundColor: ['#2ecc71', '#f1c40f', '#e74c3c']
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'bottom'
-          }
+  // Project Progress Chart
+  const projectProgressCtx = document.getElementById('projectProgressChart').getContext('2d');
+  new Chart(projectProgressCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Completed', 'In Progress', 'Not Started'],
+      datasets: [{
+        data: [35, 50, 15],
+        backgroundColor: ['#2ecc71', '#f1c40f', '#e74c3c']
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom'
         }
       }
-    });
+    }
+  });
 
-    // Team Performance Chart
-    const teamPerformanceCtx = document.getElementById('teamPerformanceChart').getContext('2d');
-    new Chart(teamPerformanceCtx, {
-      type: 'radar',
-      data: {
-        labels: ['Productivity', 'Quality', 'Collaboration', 'Innovation', 'Timeliness'],
-        datasets: [{
-          label: 'Team Alpha',
-          data: [85, 90, 88, 78, 92],
-          backgroundColor: 'rgba(52, 152, 219, 0.2)',
-          borderColor: 'rgba(52, 152, 219, 1)',
-        }, {
-          label: 'Team Beta',
-          data: [88, 85, 92, 82, 89],
-          backgroundColor: 'rgba(46, 204, 113, 0.2)',
-          borderColor: 'rgba(46, 204, 113, 1)',
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          r: {
-            angleLines: {
-              display: false
-            },
-            suggestedMin: 50,
-            suggestedMax: 100
-          }
+  // Team Performance Chart
+  const teamPerformanceCtx = document.getElementById('teamPerformanceChart').getContext('2d');
+  new Chart(teamPerformanceCtx, {
+    type: 'radar',
+    data: {
+      labels: ['Productivity', 'Quality', 'Collaboration', 'Innovation', 'Timeliness'],
+      datasets: [{
+        label: 'Team Alpha',
+        data: [85, 90, 88, 78, 92],
+        backgroundColor: 'rgba(52, 152, 219, 0.2)',
+        borderColor: 'rgba(52, 152, 219, 1)',
+      }, {
+        label: 'Team Beta',
+        data: [88, 85, 92, 82, 89],
+        backgroundColor: 'rgba(46, 204, 113, 0.2)',
+        borderColor: 'rgba(46, 204, 113, 1)',
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        r: {
+          angleLines: {
+            display: false
+          },
+          suggestedMin: 50,
+          suggestedMax: 100
         }
       }
-    });
+    }
+  });
+});
+
+// Assign Tasks form submission
+document.getElementById('assignTaskForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const team = document.getElementById('teamSelect').value;
+  const description = document.getElementById('taskDescription').value;
+  const deadline = document.getElementById('taskDeadline').value;
+  const priority = document.getElementById('taskPriority').value;
+
+  // Here you would typically send this data to a server or update your application state
+  console.log('Task assigned:', { team, description, deadline, priority });
+
+  // Clear the form
+  this.reset();
+
+  // Show a success message
+  alert('Task assigned successfully!');
+});
   </script>
 </body>
 </html>
